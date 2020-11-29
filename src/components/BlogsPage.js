@@ -1,13 +1,20 @@
 import React from 'react';
+import PostTeaser from './PostTeaser'
 
-const BlogsPage = () => {
-  return (
-    <div>
+const BlogsPage = (props) => {
+    const { posts } = props;
+    //add condition for if it is published???
+    return (
         <div>
-            <h1>Blog List Here</h1>
+            {posts.map((post) => {
+                return (
+                    <div key={post._id}>
+                    <PostTeaser title={post.title} date={post.date} />
+                </div>
+                )
+            })}
         </div>
-    </div>
-  );
+    );
 }
 
 export default BlogsPage;
