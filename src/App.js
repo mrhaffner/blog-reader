@@ -10,17 +10,15 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    //maybe have an isloading state set true here that is removed at the end
     getPosts()
   }, [])
 
   const getPosts = async () => {
     try {
+      //set isLoading to true?
       const response = await fetch('http://localhost:3000/blog', {method: 'GET', mode: 'cors'})
       const data = await response.json()
-      console.log(data)
-      //add condition for if it is published??? maybe that should be on the backend
-      setPosts(data)
+      setPosts(data.reverse())
       setIsLoading(false)
     } catch (error) {
       alert(error)//don't want an alert in production
@@ -33,7 +31,7 @@ const App = () => {
         <NavBar />
         <Switch>
         <Route path='/blog'>
-            <BlogsPage />
+            <BlogsPage posts={posts} isLoading={isLoading} />
           </Route>
           <Route path='/'>
             <HomePage posts={posts} isLoading={isLoading} />

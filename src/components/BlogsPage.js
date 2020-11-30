@@ -1,18 +1,11 @@
 import React from 'react';
-import PostTeaser from './PostTeaser'
+import BlogList from './BlogList';
 
 const BlogsPage = (props) => {
-    const { posts } = props;
-    //add condition for if it is published???
+    const { posts, isLoading } = props;
     return (
         <div>
-            {posts.map((post) => {
-                return (
-                    <div key={post._id}>
-                    <PostTeaser title={post.title} date={post.date} />
-                </div>
-                )
-            })}
+            {isLoading ? <h2>Loading Blogs</h2> : <BlogList posts={posts} />}
         </div>
     );
 }
