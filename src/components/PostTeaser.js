@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 const PostTeaser = (props) => {
-    const { title, date, hyphenTitle } = props;
+    const { title, date, hyphenTitle, } = props;
     return (
         <div>
             <div>

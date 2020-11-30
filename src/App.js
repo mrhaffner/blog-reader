@@ -8,6 +8,7 @@ import axios from 'axios'; //remove axios if you're not going to use it
 
 const App = () => {
   const [posts, setPosts] = useState(null)
+  const [comments, setComments] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -32,7 +33,21 @@ const App = () => {
         alert(error)//don't want an alert in production
       }
     }
+
+    const getComments = async () => {
+      try {
+        //set isLoading to true?
+        const response = await fetch('http://localhost:3000/blog/comments', {method: 'GET', mode: 'cors'})
+        const data = await response.json()
+        setComments(data)
+        //setIsLoading(false)
+      } catch (error) {
+        alert(error)//don't want an alert in production
+      }
+    }
+
     getPosts()
+    getComments()
   }, [])
 
   return (
@@ -49,7 +64,7 @@ const App = () => {
             <BlogsPage posts={posts} isLoading={isLoading} />
           </Route>
           <Route path='/'>
-            <HomePage posts={posts} isLoading={isLoading} />
+            <HomePage posts={posts} isLoading={isLoading} comments={comments} />
           </Route>
         </Switch>
       </div>
