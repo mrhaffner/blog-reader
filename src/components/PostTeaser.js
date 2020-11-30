@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const PostTeaser = (props) => {
-    const { title, date, } = props;
+    const { title, date, hyphenTitle } = props;
     return (
         <div>
             <div>
-                <h3>{title}</h3>
+                <Link to={`/blog/${hyphenTitle}`}>{title}</Link>
                 <h4>By Admin on {date}</h4>
             </div>
         </div>

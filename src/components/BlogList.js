@@ -7,8 +7,8 @@ const BlogList = (props) => {
         <div>
             {posts.map((post) => {
                 return (
-                    <div key={post._id}>
-                        <PostTeaser title={post.title} date={post.date} />
+                    <div key={post.hyphenTitle}>
+                        <PostTeaser title={post.title} date={post.date} hyphenTitle={post.hyphenTitle} />
                     </div>
                 )
             })}
