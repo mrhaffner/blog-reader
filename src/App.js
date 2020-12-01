@@ -8,7 +8,6 @@ import axios from 'axios'; //remove axios if you're not going to use it
 
 const App = () => {
   const [posts, setPosts] = useState(null)
-  const [comments, setComments] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -29,25 +28,11 @@ const App = () => {
         addHyphenTitle(data)
         setPosts(data.reverse())
         setIsLoading(false)
-      } catch (error) {
-        alert(error)//don't want an alert in production
+      } catch (err) {
+        console.log(err)
       }
     }
-
-    const getComments = async () => {
-      try {
-        //set isLoading to true?
-        const response = await fetch('http://localhost:3000/blog/comments', {method: 'GET', mode: 'cors'})
-        const data = await response.json()
-        setComments(data)
-        //setIsLoading(false)
-      } catch (error) {
-        alert(error)//don't want an alert in production
-      }
-    }
-
     getPosts()
-    getComments()
   }, [])
 
   return (
@@ -64,7 +49,7 @@ const App = () => {
             <BlogsPage posts={posts} isLoading={isLoading} />
           </Route>
           <Route path='/'>
-            <HomePage posts={posts} isLoading={isLoading} comments={comments} />
+            <HomePage posts={posts} isLoading={isLoading} />
           </Route>
         </Switch>
       </div>
