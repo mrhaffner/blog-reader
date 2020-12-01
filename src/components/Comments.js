@@ -1,10 +1,8 @@
 import React, {useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
 import ListComments from './ListComments';
 
 const Comments = (props) => {
     const { post } = props
-    let params = useParams()
 
     const [comments, setComments] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -15,12 +13,11 @@ const Comments = (props) => {
             //set isLoading to true?
             const response = await fetch('http://localhost:3000/blog/comments', {method: 'GET', mode: 'cors'})
             const data = await response.json()
-            //const list = data.filter(comment => comment.post === post["_id"]).reverse()
             console.log(data)
             setComments(data)
             setIsLoading(false)
-          } catch (error) {
-            alert(error)//don't want an alert in production
+          } catch (err) {
+            console.log(err)
           }
         }
         getComments()
