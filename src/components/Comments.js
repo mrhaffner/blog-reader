@@ -2,10 +2,10 @@ import React, {useState, useEffect } from 'react';
 import ListComments from './ListComments';
 
 const Comments = (props) => {
-    const { post } = props
+    const { post } = props;
 
-    const [comments, setComments] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+    const [comments, setComments] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getComments = async () => {
@@ -21,14 +21,14 @@ const Comments = (props) => {
           }
         }
         getComments()
-      }, [isLoading])
+      }, [isLoading]);
 
     const [author, setAuthor] = useState('');
     const [text, setText] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(JSON.stringify({ author, text, }))
+        e.preventDefault();
+        console.log(JSON.stringify({ author, text, }));
         try {
             const response = await fetch(`http://localhost:3000/blog/${post['_id']}/comment`, {
                 method: 'POST',
@@ -38,9 +38,11 @@ const Comments = (props) => {
                 },
                 body: JSON.stringify({ author, text }),
             })
-            const data = await response
-            console.log('response:', data)
-            setIsLoading(true)
+            const data = await response;
+            console.log('response:', data);
+            setIsLoading(true);
+            setAuthor('');
+            setText('');
         } catch (err) {
             console.log('error:', err)
         }
