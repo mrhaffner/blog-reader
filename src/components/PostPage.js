@@ -3,10 +3,9 @@ import { useParams } from "react-router-dom";
 import Comments from './Comments'
 
 const PostPage = (props) => {
-    const { posts, comments } = props;
+    const { posts } = props;
     let params = useParams()
-    const post = posts.find(obj => obj.hyphenTitle === params.hyphenTitle
-    );
+    const post = posts.find(obj => obj.hyphenTitle === params.hyphenTitle);
 
     return (
         <div>
@@ -16,7 +15,7 @@ const PostPage = (props) => {
                 <p>{post.text}</p>
                 <p>{params.hyphenTitle}</p>
             </div>
-            <Comments post={post} comments={comments} />
+            <Comments post={post} />
         </div>
     );
 }
